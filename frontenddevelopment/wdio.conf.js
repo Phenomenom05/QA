@@ -52,7 +52,8 @@ exports.config = {
     capabilities: [{
     browserName: 'chrome',
     'goog:chromeOptions': {
-        args: ['--headless', '--disable-gpu', '--no-sandbox', '--remote-debugging-port=9222']
+        args: ['--headless', '--disable-gpu', '--no-sandbox', '--remote-debugging-port=9222'],
+        logLevel: 'ALL'
     }
 }]
 
@@ -66,6 +67,8 @@ exports.config = {
     logLevel: 'info',
 
     baseUrl: 'http://localhost:8080',
+
+    services: ['chromedriver'],
     //
     // Set specific log levels per logger
     // loggers:
