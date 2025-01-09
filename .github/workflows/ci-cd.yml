@@ -19,20 +19,20 @@ jobs:
 
       # Frontend Tests
       - name: Set up HTTP server for frontend
-        working-directory: ./frontend
+        working-directory: ./frontenddevelopment
         run: |
           python3 -m http.server 8080 &
         env:
           PYTHONUNBUFFERED: 1
 
       - name: Install WebdriverIO dependencies
-        working-directory: ./frontend
+        working-directory: ./frontenddevelopment
         run: |
           npm install @wdio/cli
           npx wdio config
 
       - name: Run WebdriverIO tests
-        working-directory: ./frontend
+        working-directory: ./frontenddevelopment
         run: npx wdio run wdio.conf.js
         env:
           BASE_URL: http://localhost:8080
@@ -45,11 +45,11 @@ jobs:
           cache: 'npm'
 
       - name: Install backend dependencies
-        working-directory: ./backend
+        working-directory: ./backend-test-automation
         run: npm install
 
       - name: Run backend tests
-        working-directory: ./backend
+        working-directory: ./backend-test-automation
         run: npm test
 
       # Upload Test Reports
@@ -58,5 +58,5 @@ jobs:
         with:
           name: test-reports
           path: |
-            ./frontend/test-results
-            ./backend/coverage
+            ./frontenddevelopmet/test-results
+            ./backend-test-automation/coverage
