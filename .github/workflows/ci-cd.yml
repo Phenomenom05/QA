@@ -1,0 +1,62 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout Code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Frontend Tests
+      - name: Set up HTTP server for frontend
+        working-directory: ./frontend
+        run: |
+          python3 -m http.server 8080 &
+        env:
+          PYTHONUNBUFFERED: 1
+
+      - name: Install WebdriverIO dependencies
+        working-directory: ./frontend
+        run: |
+          npm install @wdio/cli
+          npx wdio config
+
+      - name: Run WebdriverIO tests
+        working-directory: ./frontend
+        run: npx wdio run wdio.conf.js
+        env:
+          BASE_URL: http://localhost:8080
+
+      # Backend Tests
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm install
+
+      - name: Run backend tests
+        working-directory: ./backend
+        run: npm test
+
+      # Upload Test Reports
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: |
+            ./frontend/test-results
+            ./backend/coverage
