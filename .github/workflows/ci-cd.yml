@@ -11,47 +11,58 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    resources:
+      limits:
+        memory: 4GB
+
 
     steps:
       # Checkout Code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-#      # Frontend Tests
-#      - name: Set up HTTP server for frontend
-#        working-directory: ./frontenddevelopment
-#        run: |
-#          python3 -m http.server 8080 &
-#        env:
-#          PYTHONUNBUFFERED: 1
-#
-#      - name: Install WebDriverIO dependencies
-#        working-directory: ./frontenddevelopment
-#        run: |
-#          npm install
-#          npm install @wdio/cli chromedriver
-#          npx wdio config --yes  # Automatically accept defaults without prompts
-#
-#      - name: Set up ChromeDriver
-#        working-directory: ./frontenddevelopment
-#        run: |
-#          CHROME_VERSION=$(google-chrome --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+")
-#          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-#          curl -s -o chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-#          unzip chromedriver.zip -d /usr/local/bin
-#
-#      - name: Verify Chrome and ChromeDriver versions
-#        working-directory: ./frontenddevelopment
-#        run: |
-#          google-chrome --version
-#          chromedriver --version
-#
-#      - name: Run WebDriverIO tests
-#        working-directory: ./frontenddevelopment
-#        run: |
-#          npx wdio run wdio.conf.js
-#        env:
-#          BASE_URL: http://localhost:8080
+      # Frontend Tests
+      - name: Set up HTTP server for frontend
+        working-directory: ./frontenddevelopment
+        run: |
+          python3 -m http.server 8080 &
+        env:
+          PYTHONUNBUFFERED: 1
+
+      - name: Install WebDriverIO dependencies
+        working-directory: ./frontenddevelopment
+        run: |
+          npm ci
+          npm install @wdio/cli chromedriver
+          npx wdio config --yes  # Automatically accept defaults without prompts
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Set up ChromeDriver
+        working-directory: ./frontenddevelopment
+        run: |
+          CHROME_VERSION=$(google-chrome --version | grep -oE "[0-9]+\.[0-9]+\.[0-9]+")
+          CHROMEDRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+          curl -s -o chromedriver.zip "https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+          unzip chromedriver.zip -d /usr/local/bin
+
+
+      
+      
+        
+
+      - name: Verify Chrome and ChromeDriver versions
+        working-directory: ./frontenddevelopment
+        run: |
+          google-chrome --version
+          chromedriver --version
+          
+
+      - name: Run WebDriverIO tests
+        working-directory: ./frontenddevelopment
+        run: |
+          npx wdio run wdio.conf.js
+        env:
+          BASE_URL: http://localhost:8080
 
       # Backend Tests
       - name: Set up Node.js
@@ -69,10 +80,10 @@ jobs:
         run: npm test
 
       # Upload Test Reports
-#      - name: Upload Test Reports
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: test-reports
-#          path: |
-##            ./frontenddevelopment/test-results
-#            ./backend-test-automation/coverage
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-reports
+          path: |
+            ./frontenddevelopment/test-results
+            ./backend-test-automation/coverage
