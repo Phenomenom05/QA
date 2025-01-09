@@ -29,6 +29,7 @@ jobs:
         working-directory: ./frontenddevelopment
         run: |
           npm install @wdio/cli
+          npm install chromedriver@latest
           npx wdio config --yes  # Automatically accept defaults without prompts
 
       - name: Run WebdriverIO tests
