@@ -29,7 +29,7 @@ jobs:
         working-directory: ./frontenddevelopment
         run: |
           npm install @wdio/cli
-          npx wdio config
+          npx wdio config --yes  # Automatically accept defaults without prompts
 
       - name: Run WebdriverIO tests
         working-directory: ./frontenddevelopment
@@ -58,5 +58,5 @@ jobs:
         with:
           name: test-reports
           path: |
-            ./frontenddevelopmet/test-results
+            ./frontenddevelopment/test-results
             ./backend-test-automation/coverage
