@@ -11,9 +11,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    resources:
-      limits:
-        memory: 4GB
+
 
 
     steps:
