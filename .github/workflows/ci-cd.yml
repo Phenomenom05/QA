@@ -30,7 +30,7 @@ jobs:
       - name: Install WebDriverIO dependencies
         working-directory: ./frontenddevelopment
         run: |
-          npm ci
+          npm install
           npm install @wdio/cli chromedriver
           npx wdio config --yes  # Automatically accept defaults without prompts
           sudo apt-get install -y google-chrome-stable
