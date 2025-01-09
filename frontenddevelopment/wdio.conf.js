@@ -49,13 +49,14 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-    browserName: 'chrome',
-    'goog:chromeOptions': {
-        args: ['--headless', '--disable-gpu', '--no-sandbox', '--remote-debugging-port=9222'],
-        logLevel: 'ALL'
+     capabilities: [
+    {
+      browserName: 'chrome',
+      'goog:chromeOptions': {
+        args: ['--headless', '--disable-gpu', '--no-sandbox']
+      }
     }
-}]
+  ],
 
     //
     // ===================
@@ -67,8 +68,6 @@ exports.config = {
     logLevel: 'info',
 
     baseUrl: 'http://localhost:8080',
-
-    services: ['chromedriver'],
     //
     // Set specific log levels per logger
     // loggers:
@@ -88,9 +87,9 @@ exports.config = {
     // bail (default is 0 - don't bail, run all tests).
     bail: 0,
     //
-    // Set a base URL in order to shorten url command calls. If your `url` parameter starts
-    // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
-    // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
+    // Set a base URL in order to shorten url command calls. If your url parameter starts
+    // with /, the base url gets prepended, not including the path portion of your baseUrl.
+    // If your url parameter starts without a scheme or / (like some/path), the base url
     // gets prepended directly.
     // baseUrl: 'http://localhost:8080',
     //
@@ -187,7 +186,7 @@ exports.config = {
     // },
     /**
      * Gets executed before test execution begins. At this point you can access to all global
-     * variables like `browser`. It is the perfect place to define custom commands.
+     * variables like browser. It is the perfect place to define custom commands.
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
@@ -228,11 +227,11 @@ exports.config = {
      * Function to be executed after a test (in Mocha/Jasmine only)
      * @param {object}  test             test object
      * @param {object}  context          scope object the test was executed with
-     * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
+     * @param {Error}   result.error     error object in case the test fails, otherwise undefined
      * @param {*}       result.result    return object of test function
      * @param {number}  result.duration  duration of test
      * @param {boolean} result.passed    true if test has passed, otherwise false
-     * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
+     * @param {object}  result.retries   information about spec related retries, e.g. { attempts: 0, limit: 0 }
      */
     // afterTest: function(test, context, { error, result, duration, passed, retries }) {
     // },
