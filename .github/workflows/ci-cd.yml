@@ -17,68 +17,60 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Set up Node.js (Version to be used for both frontend and backend)
-      - name: Set up Node.js for frontend and backend
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '23'  # Specify the version that works for both sections
+          node-version: '23'
 
-      # Install Chrome Dependencies for WebDriverIO
-      - name: Install Chrome Dependencies
-        run: |  
-          sudo apt-get update  
-          sudo apt-get install -y \
-            libxss1 \
-            libappindicator3-1 \
-            libgconf-2-4 \
-            fonts-liberation \
-            libnss3 \
-            xvfb \
-            wget unzip \
-            google-chrome-stable  
 
-      # Set up HTTP server for frontend
+
+      # Frontend Tests
       - name: Set up HTTP server for frontend
         working-directory: ./frontenddevelopment
-        run: |  
+        run: |
           python3 -m http.server 8080 &
         env:
           PYTHONUNBUFFERED: 1
 
-      # Install WebdriverIO and run configuration setup
-      - name: Install WebdriverIO
+      - name: Install WebDriverIO dependencies
         working-directory: ./frontenddevelopment
-        run: |  
-          npm install @wdio/cli  
-          
-          npx wdio config --yes  # Uncomment if setting up for the first time  
+        run: |
+          npm install @wdio/cli 
+          npx wdio config --yes  # Automatically accept defaults without prompts
+          sudo apt-get install -y google-chrome-stable
 
-      # Install ChromeDriver
       - name: Install ChromeDriver
-        run: |  
+        run: |
+          sudo apt-get update  
+          sudo apt-get install -y wget unzip  
           CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)  
           DRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)  
-          curl -Lo chromedriver.zip https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip  
+          curl -Lo chromedriver.zip https://storage.googleapis.com/chrome-for-testing-public/131.0.6778.264/linux64/chromedriver-linux64.zip  
           unzip chromedriver.zip && chmod +x chromedriver && sudo mv chromedriver /usr/local/bin/  
           chromedriver --version  
 
-      # Verify Chrome and ChromeDriver versions
       - name: Verify Chrome and ChromeDriver versions
-        run: |  
-          which google-chrome  
-          which chromedriver   
-          google-chrome --version  
-          chromedriver --version  
-
-      # Run WebdriverIO tests
-      - name: Run WebdriverIO tests
         working-directory: ./frontenddevelopment
-        run: |  
+        run: |
+          which google-chrome  
+          which chromedriver 
+          google-chrome --version
+          chromedriver --version
+
+      - name: Run WebDriverIO tests
+        working-directory: ./frontenddevelopment
+        run: |
           npx wdio run wdio.conf.js
         env:
           BASE_URL: http://localhost:8080
 
       # Backend Tests
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
       - name: Install backend dependencies
         working-directory: ./backend-test-automation
         run: npm ci
@@ -92,6 +84,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-reports
-          path: |  
-            ./frontenddevelopment/test-results  
+          path: |
+            ./frontenddevelopment/test-results
             ./backend-test-automation/coverage
