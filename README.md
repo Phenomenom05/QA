@@ -2,7 +2,7 @@ Matchify QA Automation
 
 Project Title:
 
-Automating Testing for Matchify Dating App
+Automated Testing for Matchify Dating App
 
 Description:
 
@@ -44,20 +44,27 @@ Chrome and ChromeDriver (ensure version compatibility)
 
 Git (to clone the repository)
 
-Step 1: Clone the Repository
+1. Clone the Repository:
+
+To get started, clone the repository using the following commands:
 
 git clone https://github.com/Phenomenom05/QA.git
+
+Then move to the QA directory path:
+
 cd QA
 
-Step 2: Install Dependencies
+2. Install Dependencies:
+
+Install the required dependencies for both frontend and backend testing:
 
 npm install
 
 This will install all necessary dependencies, including WebDriverIO, Jest, and other packages.
 
-Step 3: Frontend Tests (WebDriverIO)
+3. Frontend Tests (WebDriverIO):
 
-Start the Frontend Server
+Step 1: Start the Frontend Server
 
 Open a terminal and navigate to the frontenddevelopment directory:
 
@@ -69,7 +76,7 @@ http-server
 
 Leave this terminal running the server.
 
-Run Frontend Tests
+Step 2: Run Frontend Tests
 
 Open a second terminal and navigate to the frontenddevelopment directory:
 
@@ -79,13 +86,17 @@ Run the frontend tests using WebDriverIO:
 
 npx wdio wdio.conf.js
 
-Navigate back to the main directory:
+Step 3: Navigate Back
+
+After completing the frontend tests, return to the QA directory:
 
 cd ..
 
-Step 4: Backend Tests (Jest)
+4. Backend Tests (Jest):
 
-Navigate to the backend-test-automation directory:
+The backend tests are located in the backend-test-automation directory. To run the backend tests, follow these steps:
+
+Navigate to the backend directory:
 
 cd backend-test-automation
 
@@ -95,13 +106,11 @@ npm test
 
 This will validate the profile creation, login, and error-handling API endpoints.
 
-Step 5: CI/CD Pipeline (GitHub Actions)
+5. CI/CD Pipeline (GitHub Actions):
 
 The CI/CD pipeline is configured in the .github/workflows/ci.yml file. It automatically runs the tests whenever changes are pushed to the repository.
 
-To trigger the CI/CD pipeline:
-
-Push changes to the main branch or create a pull request:
+To trigger the CI/CD pipeline, push changes to the main branch or create a pull request:
 
 git push origin main
 
@@ -137,15 +146,9 @@ Task 2: Backend Test Automation
 
 API Testing: Automated API tests using Jest to validate profile creation and login features.
 
-Scenarios Tested:
+Test cases: Successful profile creation, error handling for missing fields, and successful/failed login attempts.
 
-Successful profile creation.
-
-Error handling for missing fields.
-
-Successful/failed login attempts.
-
-Challenge: Ensured all edge cases were handled and tested thoroughly.
+Challenge: No significant issues, but ensured all edge cases were handled and tested thoroughly.
 
 Task 3: CI/CD Integration
 
@@ -170,3 +173,4 @@ CI/CD Environment: There might be some delays in the CI/CD pipeline execution de
 Conclusion:
 
 This project demonstrates how to automate both frontend and backend tests for a dating app, integrate the tests into a CI/CD pipeline, and monitor errors effectively. It also highlights key challenges and how they were addressed, ensuring that the tests are reliable and maintainable.
+
