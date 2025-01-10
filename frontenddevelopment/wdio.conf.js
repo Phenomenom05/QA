@@ -53,7 +53,8 @@ exports.config = {
     {
       browserName: 'chrome',
       'goog:chromeOptions': {
-        args: ['--headless', '--disable-gpu', '--no-sandbox']
+        args: ['--headless', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage', '--remote-debugging-port=9222', '--window-size=1920,1080',
+            '--disable-software-rasterizer', '--disable-infobars', '--enable-logging', '--v=1']
       }
     }
   ],
