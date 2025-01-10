@@ -44,13 +44,15 @@ Chrome and ChromeDriver (ensure version compatibility)
 
 Git (to clone the repository)
 
+Steps to Setup and Run:
+
 1. Clone the Repository:
 
-To get started, clone the repository using the following commands:
+To get started, clone the repository using the following command:
 
 git clone https://github.com/Phenomenom05/QA.git
 
-Then move to the QA directory path:
+Move to the QA directory path:
 
 cd QA
 
@@ -116,6 +118,12 @@ git push origin main
 
 Check the GitHub Actions tab to view the test results.
 
+Reports:
+
+Frontend Test Report: The frontend test results can be accessed in the frontenddevelopment/reports directory.
+
+Backend Test Report: The backend test results can be accessed in the backend-test-automation/reports directory.
+
 Tools Used:
 
 WebDriverIO: For frontend web automation testing.
@@ -173,4 +181,3 @@ CI/CD Environment: There might be some delays in the CI/CD pipeline execution de
 Conclusion:
 
 This project demonstrates how to automate both frontend and backend tests for a dating app, integrate the tests into a CI/CD pipeline, and monitor errors effectively. It also highlights key challenges and how they were addressed, ensuring that the tests are reliable and maintainable.
-
