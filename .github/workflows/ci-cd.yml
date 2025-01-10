@@ -101,7 +101,7 @@ jobs:
 
       - name: Install backend dependencies
         working-directory: ./backend-test-automation
-        run: npm ci
+        run: npm install
 
       - name: Run backend tests
         working-directory: ./backend-test-automation
