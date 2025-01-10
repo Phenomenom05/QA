@@ -45,6 +45,8 @@ jobs:
       - name: Verify Chrome and ChromeDriver versions
         working-directory: ./frontenddevelopment
         run: |
+          which google-chrome  
+          which chromedriver 
           google-chrome --version
           chromedriver --version
 
