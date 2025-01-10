@@ -89,7 +89,7 @@ jobs:
         env:
           BASE_URL: http://localhost:8080
           DISPLAY: ':99'
-
+          IMAGE_PATH: 'assets/picture.jpg
       # Backend Tests
       - name: Set up Node.js
         uses: actions/setup-node@v3

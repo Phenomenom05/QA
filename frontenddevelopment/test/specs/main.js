@@ -24,7 +24,7 @@ describe('Profile Creation Feature', () => {
         await $('#interests').setValue('Hiking, Music');
 
         const uploadButton = await $('#profilePicture');
-        const filePath = 'C:\\Users\\pheda\\Downloads\\1735054619320.jpg';
+        const filePath = process.env.IMAGE_PATH';
         const remoteFilePath = await browser.uploadFile(filePath);
         await uploadButton.setValue(remoteFilePath);
 
