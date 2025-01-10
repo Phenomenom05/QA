@@ -58,9 +58,8 @@ npx wdio wdio.conf.js
 
 Step 3: Navigate Back
 After completing the frontend tests, return to the QA directory:
-
-
 cd ..
+
 4. Backend Tests (Jest):
 The backend tests are located in the backend-test-automation directory. To run the backend tests, follow these steps:
 
@@ -88,21 +87,27 @@ Supertest: For additional API testing (if applicable).
 Postman: Used for manual API testing during development.
 GitHub Actions: For continuous integration and delivery (CI/CD).
 Sentry: For error tracking and monitoring in the test automation framework.
+
 Tasks Accomplished:
 Task 1: Frontend Test Automation
 Profile Creation: Automated tests to verify successful profile creation, including mandatory fields (Name, Age, Gender, Location, Interests) and profile picture upload.
 Error Handling: Implemented error handling for invalid image uploads and missing mandatory fields.
 Challenge: Overcame the issue of submitting the form without filling in the fields by modifying the HTML to remove the 'required' attribute in input tags.
+
 Task 2: Backend Test Automation
 API Testing: Automated API tests using Jest to validate profile creation and login features.
 Test cases for successful profile creation, error handling for missing fields, and successful/failed login attempts.
 Challenge: No significant issues, but ensured all edge cases were handled and tested thoroughly.
+
 Task 3: CI/CD Integration
 GitHub Actions: Integrated frontend and backend tests into the CI/CD pipeline. Configured workflows to automatically run tests on code changes and pull requests.
 Challenge: Encountered issues with version compatibility between Chrome and ChromeDriver and ensuring the correct dependencies were installed.
+
 Task 4: Error Monitoring
 Sentry Integration: Integrated Sentry into the test automation framework to capture and log errors during test execution. Configured test logs to include relevant information such as test name, timestamp, and error details.
 Challenge: Ensured that all error details were accurately logged and displayed in the Sentry dashboard.
+
+
 Known Issues / Limitations:
 Chrome and ChromeDriver Compatibility: Ensure that the correct versions of Chrome and ChromeDriver are used to avoid compatibility issues in the tests.
 Mobile Testing: Some mobile tests may require additional configuration in Appium (if applicable).
