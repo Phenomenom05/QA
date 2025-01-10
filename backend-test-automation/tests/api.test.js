@@ -3,7 +3,7 @@ const express = require('../server'); // Adjust to your backend code path
 const Sentry = require('@sentry/node');
 const fs = require('fs');
 const path = require('path');
-require('dotenv').config();
+
 
 // Initialize Sentry
 Sentry.init({
