@@ -1,0 +1,19 @@
+2025-01-10T16:59:19.922Z - Profile Creation - Success: FAIL
+Error: number or type of arguments don't agree with uploadFile command
+Stack Trace:
+Error: number or type of arguments don't agree with uploadFile command
+    at Browser.uploadFile (C:\Users\pheda\node_modules\webdriverio\build\index.js:4673:11)
+    at Browser.wrapCommandFn (C:\Users\pheda\node_modules\@wdio\utils\build\index.js:893:32)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Context.<anonymous> (C:\Users\pheda\QA\frontenddevelopment\test\specs\main.js:47:30)
+    at async Context.executeAsync (C:\Users\pheda\node_modules\@wdio\utils\build\index.js:1013:20)
+    at async Context.testFrameworkFnWrapper (C:\Users\pheda\node_modules\@wdio\utils\build\index.js:1084:14)
+
+2025-01-10T16:59:22.685Z - Invalid Image Upload: PASS
+2025-01-10T16:59:22.912Z - Missing Mandatory Fields: PASS
+2025-01-10T17:14:17.061Z - Profile Creation - Success: PASS
+2025-01-10T17:14:23.360Z - Invalid Image Upload: PASS
+2025-01-10T17:14:23.714Z - Missing Mandatory Fields: PASS
+2025-01-10T17:26:09.908Z - Profile Creation - Success: PASS
+2025-01-10T17:26:11.441Z - Invalid Image Upload: PASS
+2025-01-10T17:26:11.735Z - Missing Mandatory Fields: PASS

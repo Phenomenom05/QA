@@ -82,6 +82,12 @@ jobs:
           google-chrome --version
           chromedriver --version
 
+      - name: Install Sentry SDK (Frontend)
+        working-directory: ./frontenddevelopment
+        run: |
+          npm install @sentry/node @sentry/tracing
+          echo "Sentry SDK installed for frontend"
+
       - name: Run WebDriverIO tests
         working-directory: ./frontenddevelopment
         run: |
@@ -90,6 +96,8 @@ jobs:
           BASE_URL: http://localhost:8080
           DISPLAY: ':99'
           IMAGE_PATH: 'assets/picture.jpg'
+          SENTRY_DSN: 'https://c2b33b72dfd69941a92a061c07e8a8d6@o4508620219219973.ingest.de.sentry.io/4508620228722768'
+
 
 
       # Backend Tests
@@ -103,9 +111,17 @@ jobs:
         working-directory: ./backend-test-automation
         run: npm ci
 
+      - name: Install Sentry SDK (Backend)
+        working-directory: ./backend-test-automation
+        run: |
+          npm install @sentry/node
+          echo "Sentry SDK installed for backend"
+
       - name: Run backend tests
         working-directory: ./backend-test-automation
         run: npm test
+        env:
+          SENTRY_DSN: 'https://c2b33b72dfd69941a92a061c07e8a8d6@o4508620219219973.ingest.de.sentry.io/4508620228722768'
 
       # Upload Test Reports
       - name: Upload Test Reports
