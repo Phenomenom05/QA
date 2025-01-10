@@ -2,7 +2,7 @@ Matchify QA Automation
 
 Project Title:
 
-Automating Testing for a Dating App - "Matchify"
+Automating Testing for Matchify Dating App
 
 Description:
 
@@ -16,7 +16,7 @@ Automating frontend and backend tests.
 
 Integrating tests into a CI/CD pipeline for continuous testing.
 
-Monitoring errors using Sentry.
+Monitoring errors.
 
 Key Features:
 
@@ -34,9 +34,9 @@ Setup Instructions:
 
 Prerequisites:
 
-Ensure the following tools are installed before proceeding:
+Before setting up the environment, ensure you have the following installed:
 
-Node.js (v23 or above)
+Node.js (version 23)
 
 NPM (Node Package Manager)
 
@@ -44,73 +44,84 @@ Chrome and ChromeDriver (ensure version compatibility)
 
 Git (to clone the repository)
 
-1. Clone the Repository:
+Step 1: Clone the Repository
 
 git clone https://github.com/Phenomenom05/QA.git
 cd QA
 
-2. Install Dependencies:
-
-Install the required dependencies for both frontend and backend testing:
+Step 2: Install Dependencies
 
 npm install
 
 This will install all necessary dependencies, including WebDriverIO, Jest, and other packages.
 
-3. Frontend Tests (WebDriverIO):
+Step 3: Frontend Tests (WebDriverIO)
 
-Step 1: Start the Frontend Server
+Start the Frontend Server
+
+Open a terminal and navigate to the frontenddevelopment directory:
 
 cd frontenddevelopment
+
+Start the frontend server using http-server:
+
 http-server
 
-Leave this terminal running.
+Leave this terminal running the server.
 
-Step 2: Run Frontend Tests
+Run Frontend Tests
 
-Open a second terminal:
+Open a second terminal and navigate to the frontenddevelopment directory:
 
 cd frontenddevelopment
+
+Run the frontend tests using WebDriverIO:
+
 npx wdio wdio.conf.js
 
-Step 3: Navigate Back
-
-After completing the frontend tests:
+Navigate back to the main directory:
 
 cd ..
 
-4. Backend Tests (Jest):
+Step 4: Backend Tests (Jest)
 
-Navigate to the backend directory:
+Navigate to the backend-test-automation directory:
 
 cd backend-test-automation
+
+Run the Jest test suite:
+
 npm test
 
-This validates the profile creation, login, and error-handling API endpoints.
+This will validate the profile creation, login, and error-handling API endpoints.
 
-5. CI/CD Pipeline (GitHub Actions):
+Step 5: CI/CD Pipeline (GitHub Actions)
 
-The CI/CD pipeline is configured in .github/workflows/ci.yml.
+The CI/CD pipeline is configured in the .github/workflows/ci.yml file. It automatically runs the tests whenever changes are pushed to the repository.
 
-To Trigger the Pipeline:
+To trigger the CI/CD pipeline:
 
 Push changes to the main branch or create a pull request:
 
 git push origin main
 
-Check the GitHub Actions tab for results.
+Check the GitHub Actions tab to view the test results.
 
 Tools Used:
 
 WebDriverIO: For frontend web automation testing.
 
+Appium: For mobile test automation (if applicable).
+
 Jest: For backend API testing.
 
-Postman: For manual API testing during development.
+Supertest: For additional API testing (if applicable).
 
-GitHub Actions: For CI/CD.
+Postman: Used for manual API testing during development.
 
-Sentry: For error tracking.
+GitHub Actions: For continuous integration and delivery (CI/CD).
+
+Sentry: For error tracking and monitoring in the test automation framework.
 
 Tasks Accomplished:
 
@@ -118,29 +129,44 @@ Task 1: Frontend Test Automation
 
 Profile Creation: Automated tests to verify successful profile creation, including mandatory fields (Name, Age, Gender, Location, Interests) and profile picture upload.
 
-Error Handling: Validated error handling for invalid image uploads and missing fields.
+Error Handling: Implemented error handling for invalid image uploads and missing mandatory fields.
+
+Challenge: Overcame the issue of submitting the form without filling in the fields by modifying the HTML to remove the 'required' attribute in input tags.
 
 Task 2: Backend Test Automation
 
 API Testing: Automated API tests using Jest to validate profile creation and login features.
 
-Test Cases: Covered successful profile creation, error handling for missing fields, and login scenarios.
+Scenarios Tested:
+
+Successful profile creation.
+
+Error handling for missing fields.
+
+Successful/failed login attempts.
+
+Challenge: Ensured all edge cases were handled and tested thoroughly.
 
 Task 3: CI/CD Integration
 
-GitHub Actions: Configured workflows to automatically run tests on code changes.
+GitHub Actions: Integrated frontend and backend tests into the CI/CD pipeline. Configured workflows to automatically run tests on code changes and pull requests.
+
+Challenge: Encountered issues with version compatibility between Chrome and ChromeDriver and ensuring the correct dependencies were installed.
 
 Task 4: Error Monitoring
 
-Integrated Sentry to log test case name, timestamp, and error details.
+Sentry Integration: Integrated Sentry into the test automation framework to capture and log errors during test execution. Configured test logs to include relevant information such as test name, timestamp, and error details.
+
+Challenge: Ensured that all error details were accurately logged and displayed in the Sentry dashboard.
 
 Known Issues / Limitations:
 
-ChromeDriver Compatibility: Ensure matching versions of Chrome and ChromeDriver.
+Chrome and ChromeDriver Compatibility: Ensure that the correct versions of Chrome and ChromeDriver are used to avoid compatibility issues in the tests.
 
-CI/CD Delays: Pipeline execution time may vary based on test size.
+Mobile Testing: Some mobile tests may require additional configuration in Appium (if applicable).
+
+CI/CD Environment: There might be some delays in the CI/CD pipeline execution depending on the number of tests and the size of the repository.
 
 Conclusion:
 
-This project demonstrates automation of both frontend and backend tests, CI/CD integration, and effective error monitoring. Challenges encountered were resolved to ensure test reliability and maintainability.
-
+This project demonstrates how to automate both frontend and backend tests for a dating app, integrate the tests into a CI/CD pipeline, and monitor errors effectively. It also highlights key challenges and how they were addressed, ensuring that the tests are reliable and maintainable.
