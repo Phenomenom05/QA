@@ -29,16 +29,16 @@ jobs:
       - name: Install WebDriverIO dependencies
         working-directory: ./frontenddevelopment
         run: |
-          npm install @wdio/cli chromedriver
+          npm install @wdio/cli 
           npx wdio config --yes  # Automatically accept defaults without prompts
 
-      - name: Install Chrome and ChromeDriver
+      
+
+      - name: Set up ChromeDriver
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip google-chrome-stable
           CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)
-          DRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*})
-          wget -O chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip
+          DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*}")
+          curl -Lo chromedriver_linux64.zip "https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip"
           unzip chromedriver_linux64.zip
           chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/
@@ -48,6 +48,7 @@ jobs:
         run: |
           google-chrome --version
           chromedriver --version
+
 
       - name: Run WebDriverIO tests
         working-directory: ./frontenddevelopment
