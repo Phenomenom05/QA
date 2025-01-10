@@ -63,6 +63,7 @@ jobs:
           npx wdio run wdio.conf.js
         env:
           BASE_URL: http://localhost:8080
+          DISPLAY: ':99'
 
       # Backend Tests
       - name: Set up Node.js
