@@ -35,7 +35,7 @@ jobs:
       - name: Set up ChromeDriver
         uses: nanasess/setup-chromedriver@v1
         with:
-          chrome-version: 'stable'
+          chromedriver-version: 'stable'
 
       - name: Verify Chrome and ChromeDriver versions
         working-directory: ./frontenddevelopment
