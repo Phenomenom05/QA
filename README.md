@@ -120,19 +120,15 @@ Check the GitHub Actions tab to view the test results.
 
 Reports:
 
-Frontend Test Report: The frontend test results can be accessed in the frontenddevelopment/reports directory.
+Frontend Test Report: The frontend test results can be accessed in the frontenddevelopment/frontenddevelopment/reports directory.
 
-Backend Test Report: The backend test results can be accessed in the backend-test-automation/reports directory.
+Backend Test Report: The backend test results can be accessed in the backend-test-automation/backend-test-automation/coverage directory.
 
 Tools Used:
 
 WebDriverIO: For frontend web automation testing.
 
-Appium: For mobile test automation (if applicable).
-
 Jest: For backend API testing.
-
-Supertest: For additional API testing (if applicable).
 
 Postman: Used for manual API testing during development.
 
@@ -173,8 +169,6 @@ Challenge: Ensured that all error details were accurately logged and displayed i
 Known Issues / Limitations:
 
 Chrome and ChromeDriver Compatibility: Ensure that the correct versions of Chrome and ChromeDriver are used to avoid compatibility issues in the tests.
-
-Mobile Testing: Some mobile tests may require additional configuration in Appium (if applicable).
 
 CI/CD Environment: There might be some delays in the CI/CD pipeline execution depending on the number of tests and the size of the repository.
 
