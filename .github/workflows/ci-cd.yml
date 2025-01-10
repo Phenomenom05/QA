@@ -21,29 +21,27 @@ jobs:
       - name: Set up HTTP server for frontend
         working-directory: ./frontenddevelopment
         run: |
-          python3 -m http.server 8080 &
-        env:
-          PYTHONUNBUFFERED: 1
+          nohup python3 -m http.server 8080 > http_server.log 2>&1 &
+          sleep 5  # Wait for the server to initialize
+          curl -I http://localhost:8080  # Verify the server is running
 
       - name: Install WebDriverIO dependencies
         working-directory: ./frontenddevelopment
         run: |
-          npm install @wdio/cli chromedriver
-          npx wdio config --yes  # Automatically accept defaults without prompts
-          sudo apt-get install -y google-chrome-stable
+          npm install @wdio/cli
 
-      - name: Install ChromeDriver
+      - name: Install Chrome and ChromeDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget unzip
-          CHROME_DRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip
+          sudo apt-get install -y google-chrome-stable
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
+          CHROMEDRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*})
+          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
           chromedriver --version
 
       - name: Verify Chrome and ChromeDriver versions
-        working-directory: ./frontenddevelopment
         run: |
           google-chrome --version
           chromedriver --version
