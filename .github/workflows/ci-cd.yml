@@ -31,7 +31,6 @@ jobs:
             libxss1 \
             libappindicator3-1 \
             libgconf-2-4 \
-            libasound2 \
             fonts-liberation \
             libnss3 \
             xvfb \
