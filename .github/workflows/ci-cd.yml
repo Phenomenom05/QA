@@ -32,10 +32,15 @@ jobs:
           npx wdio config --yes  # Automatically accept defaults without prompts
           sudo apt-get install -y google-chrome-stable
 
-      - name: Set up ChromeDriver
-        uses: browser-actions/setup-chromedriver@v2
-        with:
-          chromedriver-version: 'latest'
+      - name: Install ChromeDriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          CHROME_DRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+          chromedriver --version
 
       - name: Verify Chrome and ChromeDriver versions
         working-directory: ./frontenddevelopment
