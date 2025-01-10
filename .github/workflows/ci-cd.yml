@@ -33,9 +33,9 @@ jobs:
           sudo apt-get install -y google-chrome-stable
 
       - name: Set up ChromeDriver
-        uses: nanasess/setup-chromedriver@v1
+        uses: browser-actions/setup-chromedriver@v2
         with:
-          chromedriver-version: 'stable'
+          chromedriver-version: 'latest'
 
       - name: Verify Chrome and ChromeDriver versions
         working-directory: ./frontenddevelopment
