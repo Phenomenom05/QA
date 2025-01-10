@@ -104,8 +104,6 @@ Tools Used:
 
 WebDriverIO: For frontend web automation testing.
 
-Appium: For mobile test automation.
-
 Jest: For backend API testing.
 
 Postman: For manual API testing during development.
@@ -132,19 +130,13 @@ Task 3: CI/CD Integration
 
 GitHub Actions: Configured workflows to automatically run tests on code changes.
 
-Task 4: Flaky Test Analysis
-
-Refactored the flaky test script, improved reliability, and documented the root cause.
-
-Task 5: Error Monitoring
+Task 4: Error Monitoring
 
 Integrated Sentry to log test case name, timestamp, and error details.
 
 Known Issues / Limitations:
 
 ChromeDriver Compatibility: Ensure matching versions of Chrome and ChromeDriver.
-
-Mobile Testing: Additional Appium configuration may be needed.
 
 CI/CD Delays: Pipeline execution time may vary based on test size.
 
