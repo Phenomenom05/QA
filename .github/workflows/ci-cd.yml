@@ -21,23 +21,26 @@ jobs:
       - name: Set up HTTP server for frontend
         working-directory: ./frontenddevelopment
         run: |
-          nohup python3 -m http.server 8080 > http_server.log 2>&1 &
-          sleep 5  # Wait for the server to initialize
-          curl -I http://localhost:8080  # Verify the server is running
+          python3 -m http.server 8080 &
+          sleep 5  # Ensure the server has time to start
+        env:
+          PYTHONUNBUFFERED: 1
 
       - name: Install WebDriverIO dependencies
         working-directory: ./frontenddevelopment
         run: |
-          npm install @wdio/cli
+          npm install @wdio/cli chromedriver
+          npx wdio config --yes  # Automatically accept defaults without prompts
 
       - name: Install Chrome and ChromeDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          CHROME_VERSION=$(google-chrome --version | awk '{print $3}')
-          CHROMEDRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*})
-          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
+          sudo apt-get install -y wget unzip google-chrome-stable
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1)
+          DRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*})
+          wget -O chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
+          chmod +x chromedriver
           sudo mv chromedriver /usr/local/bin/
           chromedriver --version
 
